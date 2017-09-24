@@ -6,22 +6,27 @@
 // 1- create a web server:
 var http = require('http');
 const server = http.createServer((request, response) => {
-  response.writeHead(200, {'Content-Type' : 'Text/Plain'});
-  setInterval(function(){
-      response.write(new Date() + '\n');
-  }, 1000);// get the date of the response every 1 second
 
 
-//response.end('Hello World\n ');
+homeRoute(request, response);
 
 }).listen(3000);
 console.log('Server running at http://<Workspace-url>/');
 
 // 2- handle the http route GET / and  POST / i.e Home
+function homeRoute(request, response) {
   // if url == "/" && GET
+  if (request.url === "/") {
     // show the searsh field
+    response.writeHead(200, {'Content-Type' : 'Text/Plain'});
+        response.write('Header\n');
+        response.write('Search\n');
+        response.end('Footer\n ');
+  }
   // if url == "/" && POST
     //redirect to /:username
+}
+
 
 // 3- handle the HTTP rout GET /:username  i.e /omarnizamaldeen
   // if url == "/..."
