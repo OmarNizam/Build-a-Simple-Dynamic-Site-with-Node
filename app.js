@@ -4,6 +4,18 @@
 
 
 // 1- create a web server:
+var http = require('http');
+const server = http.createServer((request, response) => {
+  response.writeHead(200, {'Content-Type' : 'Text/Plain'});
+  setInterval(function(){
+      response.write(new Date() + '\n');
+  }, 1000);// get the date of the response every 1 second
+
+
+//response.end('Hello World\n ');
+
+}).listen(3000);
+console.log('Server running at http://<Workspace-url>/');
 
 // 2- handle the http route GET / and  POST / i.e Home
   // if url == "/" && GET
@@ -22,4 +34,4 @@
 
 // 4- function that handles the reading of files and merge in value
   // read from file and get a string
-    // merge values in to string 
+    // merge values in to string
