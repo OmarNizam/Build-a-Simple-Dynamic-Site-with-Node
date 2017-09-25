@@ -10,7 +10,7 @@ const server = http.createServer((request, response) => {
 router.home(request, response);
 router.user(request, response);
 }).listen(3000);
-console.log('Server running at http://<Workspace-url>/');
+console.log('Server running at http://localhost:3000/');
 
 
 
