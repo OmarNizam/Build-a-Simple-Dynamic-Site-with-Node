@@ -22,7 +22,7 @@ function home(request, response) {
           // console.log(postBody.toString()); // postBody here is a buffer
           // extract the user name
           var query = querystring.parse(postBody.toString());
-          response.write(query.username);
+          response.writeHead(303, {'location' : "/" + query.username});
           response.end();
           //redirect to /:username
         })
