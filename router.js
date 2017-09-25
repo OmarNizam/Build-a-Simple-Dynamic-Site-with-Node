@@ -1,13 +1,14 @@
 var Profile = require("./profile");
 var renderer = require("./renderer")
 
+var commonHeaders = {'Content-Type' : 'Text/html'};
 
 // handle the http route GET / and  POST / i.e Home
 function home(request, response) {
   // if url == "/" && GET
   if (request.url === "/") {
     // show the searsh field
-    response.writeHead(200, {'Content-Type' : 'Text/Plain'});
+    response.writeHead(200, commonHeaders);
     renderer.view("header", {}, response);
     renderer.view("search", {}, response);
     renderer.view("footer", {}, response);
@@ -24,7 +25,7 @@ function user(request, response){
   // if url == "/..."
   var username = request.url.replace("/", "");
   if (username.length > 0) {
-    response.writeHead(200, {'Content-Type' : 'Text/Plain'});
+    response.writeHead(200, commonHeaders);
     renderer.view("header", {}, response);
     //get JSON from treehouse
     var studentProfile = new Profile(username);
