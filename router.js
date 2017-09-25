@@ -1,5 +1,6 @@
-var Profile = require("./profile");
-var renderer = require("./renderer")
+const Profile = require("./profile");
+const renderer = require("./renderer")
+const querystring = require('querystring');
 
 var commonHeaders = {'Content-Type' : 'Text/html'};
 
@@ -7,15 +8,28 @@ var commonHeaders = {'Content-Type' : 'Text/html'};
 function home(request, response) {
   // if url == "/" && GET
   if (request.url === "/") {
-    // show the searsh field
-    response.writeHead(200, commonHeaders);
-    renderer.view("header", {}, response);
-    renderer.view("search", {}, response);
-    renderer.view("footer", {}, response);
-    response.end();
+    if (request.method.toLowerCase() === "get") {
+      // show the searsh field
+      response.writeHead(200, commonHeaders);
+      renderer.view("header", {}, response);
+      renderer.view("search", {}, response);
+      renderer.view("footer", {}, response);
+      response.end();
+    } else {
+      // if url == "/" && POST
+        // Get the post data from the body
+        request.on('data', function(postBody) {
+          // console.log(postBody.toString()); // postBody here is a buffer
+          // extract the user name
+          var query = querystring.parse(postBody.toString());
+          response.write(query.username);
+          response.end();
+          //redirect to /:username
+        })
+
+    }
   }
-  // if url == "/" && POST
-    //redirect to /:username
+
 }
 
 
